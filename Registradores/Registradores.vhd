@@ -9,10 +9,10 @@ port(
 		rst: in std_logic;
 		data: inout std_logic_vector(7 downto 0);
 		addrs: in std_logic;
-		reg0: inout std_logic_vector(7 downto 0);
-		reg1: inout std_logic_vector(7 downto 0);
-		reg2: inout std_logic_vector(7 downto 0);
-		reg3: inout std_logic_vector(7 downto 0);
+		R0: inout std_logic_vector(7 downto 0);
+		R1: inout std_logic_vector(7 downto 0);
+		R2: inout std_logic_vector(7 downto 0);
+		R3: inout std_logic_vector(7 downto 0);
 		);
 end entity reg;
 
@@ -22,7 +22,9 @@ architecture reg_operations of reg is
 	signal regs: reg_array := (others => (others => '0')); -- Estou criando um sinal que vai enviar 0 para todas as posições do registrador, definindo um estado inicial, mas só quando eu chama-lo;
 	
 	begin
+
 	process(clock)
+
 	begin 
 		if rising_edge(clk) then
 			if rst = '1' then
@@ -32,8 +34,9 @@ architecture reg_operations of reg is
 			elsif we = '0' then
 				data <= regs(eddrs);
 			else (others => 'Z');
-				end if
-			end if
+				end if;
+			end if;
 	end process;
-		
+
+end architecture reg_operations;
 	
