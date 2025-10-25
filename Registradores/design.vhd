@@ -3,16 +3,16 @@ use IEEE.std_logic_all_1164;
 
 entity reg is
 port(
-		clk : in std_logic;
-		we : in std_logic;
-		cs : in std_logic;
-		rst: in std_logic;
-		data: inout std_logic_vector(7 downto 0);
+		clk_reg : in std_logic;
+		we_reg : in std_logic;
+		cs_reg : in std_logic;
+		rst_reg: in std_logic;
+		data_reg: inout std_logic_vector(7 downto 0);
 		addrs: in std_logic;
-		R0: inout std_logic_vector(7 downto 0);
-		R1: inout std_logic_vector(7 downto 0);
-		R2: inout std_logic_vector(7 downto 0);
-		R3: inout std_logic_vector(7 downto 0);
+		R0: inout std_logic_vector(7 downto 0); --Registrador 1 Fixo para dados
+		R1: inout std_logic_vector(7 downto 0); --Registrador 2 Fixo para dados
+		R2: inout std_logic_vector(7 downto 0); --Registrador Fixo para armazenamento
+		R3: inout std_logic_vector(7 downto 0); --Registrador Geral
 		);
 end entity reg;
 
@@ -26,13 +26,13 @@ architecture reg_operations of reg is
 	process(clock)
 
 	begin 
-		if rising_edge(clk) then
-			if rst = '1' then
+		if rising_edge(clk_reg) then
+			if rst_reg = '1' then
 				regs <= (others => (others => '0'));
-			elsif we = '1' then'
-				regs(addrs) <= data;
-			elsif we = '0' then
-				data <= regs(eddrs);
+			elsif we_reg = '1' then'
+				regs(addrs) <= data_reg;
+			elsif we_reg = '0' then
+				data_reg <= regs(eddrs);
 			else (others => 'Z');
 				end if;
 			end if;
