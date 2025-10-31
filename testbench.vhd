@@ -127,6 +127,8 @@ BEGIN
             s_addrs_p       <= program_memory(pc).addr;
             s_data_to_reg_p <= program_memory(pc).data;
 
+        REPORT "OPERACAO SELECIONADA: " & s_instruction'image severity NOTE;
+        REPORT "DADOS DOS RESULTADOS: " & s_data_out_p'image severity NOTE;
             -- EXECUTE: O processador executa a instrução
             
             -- INCREMENT: Avança o PC, a menos que seja HALT

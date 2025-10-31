@@ -1,0 +1,48 @@
+; --- Programa de Teste Completo ---
+; Testa: ADD, MOV R1,R2, SUB, COMP, MULT (Overflow)
+; Formato: <instruction> <addrs_p> <data_to_reg_p>
+
+; --- Teste 1: R2 = 15 + 10 = 25 ---
+; Ciclo 0: MOV R0, 15
+00000000 00000000 00001111
+; Ciclo 1: MOV R1, 10
+00000000 00000001 00001010
+; Ciclo 2: ADD (R2 <= R0 + R1)
+00000001 00000000 00000000
+
+; --- Teste 2: MOV R1, R2 (R1 <= 25) ---
+; Ciclo 3: MOV R1, R2
+00010000 00000000 00000000
+
+; --- Teste 3: R2 = 30 - 25 = 5 ---
+; Ciclo 4: MOV R0, 30
+00000000 00000000 00011110
+; Ciclo 5: SUB (R2 <= R0 - R1)
+00000010 00000000 00000000
+
+; --- Teste 4: COMP (False) (R2 = 0) ---
+; Testa se R0 (30) == R1 (25). Falso.
+; Ciclo 6: COMP
+00001010 00000000 00000000
+
+; --- Teste 5: COMP (True) (R2 = 1) ---
+; Ciclo 7: MOV R0, 50
+00000000 00000000 00110010
+; Ciclo 8: MOV R1, 50
+00000000 00000001 00110010
+; Ciclo 9: COMP (R2 <= 1)
+00001010 00000000 00000000
+
+; --- Teste 6: Bloqueio de Overflow ---
+; R2 atualmente contem '1' do teste anterior
+; Ciclo 10: MOV R0, 100
+00000000 00000000 01100100
+; Ciclo 11: MOV R1, 3
+00000000 00000001 00000011
+; Ciclo 12: MULT (100 * 3 = 300 -> Overflow)
+; A escrita em R2 deve ser bloqueada.
+00000011 00000000 00000000
+
+; --- Teste 7: HALT ---
+; Ciclo 13: HALT
+00001111 00000000 00000000

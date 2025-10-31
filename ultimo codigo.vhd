@@ -29,6 +29,7 @@ BEGIN
 
   p_halt_logic : PROCESS (clk_p, rst_p)
   BEGIN
+   
     IF rst_p = '1' THEN
       halt_flag <= '0';
     ELSIF rising_edge(clk_p) THEN
@@ -144,6 +145,9 @@ BEGIN
 
       END IF;
     END IF;
+
+        REPORT "DADO 1: " & R0_out'image severity NOTE;
+        REPORT "DADOS 2: " & R1_out'image severity NOTE;
   END PROCESS;
 
 END ARCHITECTURE reg_operations;
@@ -730,9 +734,8 @@ BEGIN
   END PROCESS;
 
 END ARCHITECTURE mult_op;
--- ┌───────────────────────────────────────────────────────────────────────────────────┐
--- │                                        END                                        │
--- └───────────────────────────────────────────────────────────────────────────────────┘
+
+-- Fim da mult
 
 -- ┌───────────────────────────────────────────────────────────────────────────────────┐
 -- │                                      Divisão                                      │
