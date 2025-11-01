@@ -4,6 +4,7 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <regex>
 
 
 using namespace std;
@@ -21,7 +22,6 @@ class Opcode{
 
 class Registradores{
     static map<string, uint8_t> regsTable;
-    static map<uint8_t, uint8_t> bancoRegs;
 
     public:
         static uint8_t getReg(string nomeReg);
@@ -34,7 +34,7 @@ class Instruction{
     vector<uint8_t> operandos;
 
     public:
-    Instruction(string mnemonico,vector<uint8_t> operandos);
+    Instruction(string mnemonico,vector<uint8_t>& operandos);
     uint8_t getOperacao();
     vector<uint8_t> getOperandos();
     void printInstruction();
